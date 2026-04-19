@@ -7,7 +7,8 @@ from pydantic import BaseModel
 from .models import BillExtract
 from .ocr import extract_bill
 from .cms import analyze, Anomaly, AnalysisResult
-from .legal import match_all_protections, LegalResult
+from .legal import match_all_protections, LegalMatch, LegalResult
+from .letter import generate_all, GenerateResult
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
 
@@ -71,3 +72,18 @@ class LegalRequest(BaseModel):
 async def legal_match(req: LegalRequest):
     results = match_all_protections(req.anomalies, req.extract)
     return {"matches": {k: [m.model_dump() for m in v] for k, v in results.items()}}
+
+
+class GenerateRequest(BaseModel):
+    extract: BillExtract
+    anomalies: list[Anomaly]
+    legal_matches: dict[str, list[LegalMatch]]
+
+
+@app.post("/api/generate")
+async def generate(req: GenerateRequest):
+    try:
+        result = generate_all(req.extract, req.anomalies, req.legal_matches)
+    except ValueError as e:
+        raise HTTPException(422, str(e))
+    return result.model_dump()
