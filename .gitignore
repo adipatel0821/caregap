@@ -1,5 +1,7 @@
 .env
 .env.*
+service-account.json
+**/service-account.json
 .venv/
 __pycache__/
 *.pyc

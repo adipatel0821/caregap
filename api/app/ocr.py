@@ -2,8 +2,9 @@ import json
 import logging
 import time
 import os
+import base64
 
-from google import genai
+import anthropic
 from dotenv import load_dotenv
 
 from .models import BillExtract
@@ -12,15 +13,6 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "../../.env"))
 load_dotenv()
 
 log = logging.getLogger(__name__)
-
-_client = None
-
-
-def _get_client():
-    global _client
-    key = os.environ.get("GOOGLE_API_KEY", "")
-    _client = genai.Client(api_key=key)
-    return _client
 
 EXTRACTION_PROMPT = """You are a medical bill parser. Extract structured data from this bill image.
 
@@ -56,46 +48,72 @@ Rules:
 - Extract every line item, even ones with $0.00 charges."""
 
 
-RETRY_PROMPT = """Your last reply was not valid JSON. Here is what you returned:
+MIME_MAP = {
+    "image/jpeg": "image/jpeg",
+    "image/png": "image/png",
+    "image/webp": "image/webp",
+    "application/pdf": "application/pdf",
+}
 
-{raw}
 
-Return ONLY the corrected JSON object, no markdown fences, no explanation."""
+def _get_client():
+    return anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
 
 
 def extract_bill(image_bytes: bytes, mime_type: str = "image/jpeg") -> BillExtract:
+    client = _get_client()
+    media_type = MIME_MAP.get(mime_type, "image/jpeg")
+    b64 = base64.standard_b64encode(image_bytes).decode("utf-8")
+
     start = time.time()
-    response = _get_client().models.generate_content(
-        model="gemini-2.0-flash",
-        contents=[
-            EXTRACTION_PROMPT,
-            {"inline_data": {"mime_type": mime_type, "data": image_bytes}},
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": media_type,
+                            "data": b64,
+                        },
+                    },
+                    {"type": "text", "text": EXTRACTION_PROMPT},
+                ],
+            }
         ],
-        config={"temperature": 0.1, "max_output_tokens": 4096},
     )
-    raw = response.text.strip()
+    raw = response.content[0].text.strip()
     elapsed = time.time() - start
-    log.info(f"gemini ocr took {elapsed:.1f}s, response length {len(raw)} chars")
+    log.info(f"claude ocr took {elapsed:.1f}s, response length {len(raw)} chars")
 
     parsed = _try_parse(raw)
     if parsed is not None:
         parsed["raw_text"] = raw
         return BillExtract(**parsed)
 
-    # one retry with the raw output
-    log.warning("first gemini response wasn't valid json, retrying")
-    retry_response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=RETRY_PROMPT.format(raw=raw[:3000]),
-        config={"temperature": 0.0, "max_output_tokens": 4096},
+    # one retry
+    log.warning("first response wasn't valid json, retrying")
+    retry = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": f"Your last reply was not valid JSON. Here it is:\n\n{raw[:3000]}\n\nReturn ONLY the corrected JSON object, no markdown fences.",
+            }
+        ],
     )
-    raw2 = retry_response.text.strip()
+    raw2 = retry.content[0].text.strip()
     parsed2 = _try_parse(raw2)
     if parsed2 is not None:
         parsed2["raw_text"] = raw2
         return BillExtract(**parsed2)
 
-    log.error(f"gemini failed to return valid json after retry. raw: {raw2[:500]}")
+    log.error(f"failed to get valid json after retry: {raw2[:500]}")
     raise ValueError("Couldn't parse bill — check image resolution and try again")
 
 
