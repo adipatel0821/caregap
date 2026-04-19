@@ -2,9 +2,16 @@
 
 import { useState, useCallback } from "react";
 import { Nav } from "@/components/nav";
+import { Footer } from "@/components/footer";
 import { UploadCard } from "@/components/upload-card";
 import { Analyzing } from "@/components/analyzing";
 import { ResultsView } from "@/components/results-view";
+import { SampleAnalysis } from "@/components/sample-analysis";
+import { TrustSection } from "@/components/trust-section";
+import { LegalProtections } from "@/components/legal-protections";
+import { StatsBand } from "@/components/stats-band";
+import { WhoIsFor } from "@/components/who-is-for";
+import { FAQ } from "@/components/faq";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -167,9 +174,7 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        CareGap is for informational purposes only and does not constitute legal advice.
-      </footer>
+      <Footer />
     </div>
   );
 }
@@ -211,7 +216,11 @@ function Landing({
         </div>
       </section>
 
-      <section className="py-12 px-4 bg-[var(--color-warm-gray)]">
+      <SampleAnalysis />
+
+      <TrustSection />
+
+      <section id="how-it-works" className="py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="font-serif text-2xl font-medium text-center mb-10">How it works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -232,7 +241,7 @@ function Landing({
                 desc: "A ready-to-send letter with specific charges, legal citations, and next steps.",
               },
             ].map((step, i) => (
-              <Card key={i} className="p-6 text-center border-none bg-white shadow-sm">
+              <Card key={i} className="p-6 text-center border-none bg-[var(--color-warm-gray)] shadow-sm">
                 <step.icon className="h-8 w-8 mx-auto mb-3 text-[var(--color-teal)]" />
                 <h3 className="font-serif font-medium text-lg">{step.title}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{step.desc}</p>
@@ -242,25 +251,13 @@ function Landing({
         </div>
       </section>
 
-      <section className="py-10 px-4">
-        <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-          {[
-            { icon: Shield, text: "HIPAA-conscious design" },
-            { icon: CheckCircle2, text: "Real legal citations only" },
-            { icon: Scale, text: "18,000+ Medicare rates" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center justify-center gap-2 text-sm text-muted-foreground"
-            >
-              <item.icon className="h-4 w-4 text-[var(--color-teal)]" />
-              {item.text}
-            </div>
-          ))}
-        </div>
-      </section>
+      <LegalProtections />
 
-      <section id="upload-section" className="py-12 px-4 pb-20">
+      <StatsBand />
+
+      <WhoIsFor />
+
+      <section id="upload-section" className="py-12 px-4">
         <div className="max-w-xl mx-auto space-y-4">
           <UploadCard onFile={onFile} />
           <div className="text-center">
@@ -268,6 +265,14 @@ function Landing({
           </div>
         </div>
       </section>
+
+      <FAQ />
+
+      {/* TODO(user): Item 11 — Social proof / testimonials.
+          Do NOT fabricate testimonials. Leave this commented out entirely
+          until real quotes are collected. When ready, add 2-3 quotes with:
+          first name + last initial + city + month/year + one specific outcome.
+          Place between the FAQ and the footer. */}
     </>
   );
 }

@@ -14,6 +14,9 @@ export function Nav() {
           </span>
         </Link>
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
+          <Link href="/learn" className="hover:text-foreground transition-colors">
+            Learn
+          </Link>
           <Link href="/about" className="hover:text-foreground transition-colors">
             About
           </Link>
