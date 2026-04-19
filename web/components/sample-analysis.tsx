@@ -1,21 +1,26 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AlertTriangle, Shield, FileText } from "lucide-react";
+import { useInView } from "@/hooks/use-in-view";
 
 export function SampleAnalysis() {
+  const { ref, visible } = useInView();
+
   return (
-    <section id="sample" className="py-16 px-4">
+    <section id="sample" className="py-16 px-4 section-glow" ref={ref}>
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-serif text-2xl font-medium text-center mb-2">
+        <h2 className={`font-serif text-2xl font-medium text-center mb-2 ${visible ? "animate-fade-up" : "opacity-0"}`}>
           See a real analysis
         </h2>
-        <p className="text-center text-muted-foreground mb-10">
+        <p className={`text-center text-muted-foreground mb-10 ${visible ? "animate-fade-up delay-100" : "opacity-0"}`}>
           Here&apos;s what CareGap finds on a typical emergency room bill.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* left: sample bill */}
-          <Card className="p-0 overflow-hidden border-border/80">
+          <Card className={`p-0 overflow-hidden border-border/80 card-hover ${visible ? "animate-slide-left delay-200" : "opacity-0"}`}>
             <div className="bg-[var(--color-teal)] text-white px-6 py-4">
               <p className="font-serif font-medium text-lg">Riverside General Medical Center</p>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm opacity-80 mt-1">
@@ -70,7 +75,7 @@ export function SampleAnalysis() {
           </Card>
 
           {/* right: analysis output */}
-          <div className="space-y-4">
+          <div className={`space-y-4 ${visible ? "animate-slide-right delay-300" : "opacity-0"}`}>
             {/* flagged charges */}
             <Card className="p-5">
               <div className="flex items-center gap-2 mb-3">

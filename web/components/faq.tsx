@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useInView } from "@/hooks/use-in-view";
 
 const ITEMS = [
   {
@@ -48,29 +49,40 @@ const ITEMS = [
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
+  const { ref, visible } = useInView();
 
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4" ref={ref}>
       <div className="max-w-2xl mx-auto">
-        <h2 className="font-serif text-2xl font-medium text-center mb-10">
+        <h2
+          className={`font-serif text-2xl font-medium text-center mb-10 ${
+            visible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
           Questions people actually ask
         </h2>
         <div className="space-y-2">
           {ITEMS.map((item, i) => (
-            <div key={i} className="border border-border/60 rounded-lg overflow-hidden">
+            <div
+              key={i}
+              className={`border border-border/60 rounded-lg overflow-hidden card-hover ${
+                visible ? "animate-fade-up" : "opacity-0"
+              } ${open === i ? "border-[var(--color-teal)]/30 shadow-sm" : ""}`}
+              style={{ animationDelay: `${Math.min(i * 60, 400)}ms` }}
+            >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-[var(--color-warm-gray)]/50 transition-colors"
+                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-[var(--color-warm-gray)]/50 transition-all duration-200"
               >
                 <span className="font-medium text-sm pr-4">{item.q}</span>
                 <ChevronDown
-                  className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 ${
-                    open === i ? "rotate-180" : ""
+                  className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-300 ${
+                    open === i ? "rotate-180 text-[var(--color-teal)]" : ""
                   }`}
                 />
               </button>
               {open === i && (
-                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">
+                <div className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed faq-answer">
                   {item.a}
                 </div>
               )}

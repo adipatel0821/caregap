@@ -1,14 +1,27 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { Shield, Heart, Building2, Scale, MapPin, CreditCard } from "lucide-react";
+import { useInView } from "@/hooks/use-in-view";
 
 export function LegalProtections() {
+  const { ref, visible } = useInView();
+
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4" ref={ref}>
       <div className="max-w-4xl mx-auto">
-        <h2 className="font-serif text-2xl font-medium text-center mb-2">
+        <h2
+          className={`font-serif text-2xl font-medium text-center mb-2 ${
+            visible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
           Laws most patients don&apos;t know exist
         </h2>
-        <p className="text-center text-muted-foreground mb-10">
+        <p
+          className={`text-center text-muted-foreground mb-10 ${
+            visible ? "animate-fade-up delay-100" : "opacity-0"
+          }`}
+        >
           CareGap checks every bill against these protections automatically.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -44,8 +57,14 @@ export function LegalProtections() {
               text: "Paid medical debts and medical debts under $500 generally can\u2019t appear on your credit report. If yours does, you can force its removal.",
             },
           ].map((item, i) => (
-            <Card key={i} className="p-5 border-none bg-[var(--color-warm-gray)]">
-              <item.icon className="h-5 w-5 text-[var(--color-teal)] mb-3" />
+            <Card
+              key={i}
+              className={`p-5 border-none bg-[var(--color-warm-gray)] card-hover group ${
+                visible ? "animate-fade-up" : "opacity-0"
+              }`}
+              style={{ animationDelay: `${200 + i * 80}ms` }}
+            >
+              <item.icon className="h-5 w-5 text-[var(--color-teal)] mb-3 transition-transform duration-200 group-hover:scale-110" />
               <h3 className="font-serif font-medium text-base mb-2">{item.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p>
             </Card>

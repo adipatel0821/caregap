@@ -64,7 +64,7 @@ export function Footer() {
               href="https://github.com/adipatel0821/caregap"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="text-xs text-muted-foreground social-icon"
             >
               GitHub
             </a>
@@ -72,7 +72,7 @@ export function Footer() {
               href="https://linkedin.com/company/caregap"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="text-xs text-muted-foreground social-icon"
             >
               LinkedIn
             </a>
@@ -80,7 +80,7 @@ export function Footer() {
               href="https://instagram.com/caregap.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="text-xs text-muted-foreground social-icon"
             >
               Instagram
             </a>

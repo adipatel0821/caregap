@@ -191,24 +191,24 @@ function Landing({
     <>
       <section className="py-16 md:py-24 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight leading-tight">
-            Know what you <span className="text-[var(--color-teal)]">really</span> owe
+          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight leading-tight animate-fade-up">
+            Know what you <span className="text-gradient">really</span> owe
           </h1>
-          <p className="text-lg text-muted-foreground mt-4 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-muted-foreground mt-4 max-w-xl mx-auto leading-relaxed animate-fade-up delay-200">
             Upload a medical bill. CareGap compares every charge against Medicare rates,
             matches your legal protections, and writes a dispute letter for you.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8 animate-fade-up delay-400">
             <Button
               size="lg"
-              className="bg-[var(--color-teal)] hover:bg-[var(--color-teal)]/90 gap-2"
+              className="bg-[var(--color-teal)] hover:bg-[var(--color-teal)]/90 gap-2 btn-glow"
               onClick={() =>
                 document.getElementById("upload-section")?.scrollIntoView({ behavior: "smooth" })
               }
             >
               <Upload className="h-4 w-4" /> Upload a bill
             </Button>
-            <Button variant="outline" size="lg" onClick={onDemo} className="gap-2">
+            <Button variant="outline" size="lg" onClick={onDemo} className="gap-2 btn-glow">
               Try the demo <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -240,8 +240,8 @@ function Landing({
                 desc: "A ready-to-send letter with specific charges, legal citations, and next steps.",
               },
             ].map((step, i) => (
-              <Card key={i} className="p-6 text-center border-none bg-[var(--color-warm-gray)] shadow-sm">
-                <step.icon className="h-8 w-8 mx-auto mb-3 text-[var(--color-teal)]" />
+              <Card key={i} className="p-6 text-center border-none bg-[var(--color-warm-gray)] shadow-sm card-hover">
+                <step.icon className="h-8 w-8 mx-auto mb-3 text-[var(--color-teal)] icon-hover" />
                 <h3 className="font-serif font-medium text-lg">{step.title}</h3>
                 <p className="text-sm text-muted-foreground mt-2">{step.desc}</p>
               </Card>

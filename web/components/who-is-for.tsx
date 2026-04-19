@@ -1,15 +1,28 @@
+"use client";
+
 import { Check, Minus } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { useInView } from "@/hooks/use-in-view";
 
 export function WhoIsFor() {
+  const { ref, visible } = useInView();
+
   return (
-    <section className="py-16 px-4 bg-[var(--color-warm-gray)]">
+    <section className="py-16 px-4 bg-[var(--color-warm-gray)]" ref={ref}>
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-serif text-2xl font-medium text-center mb-10">
+        <h2
+          className={`font-serif text-2xl font-medium text-center mb-10 ${
+            visible ? "animate-fade-up" : "opacity-0"
+          }`}
+        >
           Is CareGap right for your situation?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="p-6 border-none bg-white">
+          <Card
+            className={`p-6 border-none bg-white card-hover ${
+              visible ? "animate-slide-left delay-200" : "opacity-0"
+            }`}
+          >
             <h3 className="font-medium text-sm uppercase tracking-wide text-[var(--color-teal)] mb-4">
               CareGap is for you if:
             </h3>
@@ -31,7 +44,11 @@ export function WhoIsFor() {
             </ul>
           </Card>
 
-          <Card className="p-6 border-none bg-white">
+          <Card
+            className={`p-6 border-none bg-white card-hover ${
+              visible ? "animate-slide-right delay-300" : "opacity-0"
+            }`}
+          >
             <h3 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-4">
               Not built for (yet):
             </h3>
@@ -51,7 +68,11 @@ export function WhoIsFor() {
             </ul>
           </Card>
         </div>
-        <p className="text-xs text-muted-foreground text-center mt-6">
+        <p
+          className={`text-xs text-muted-foreground text-center mt-6 ${
+            visible ? "animate-fade-in delay-500" : "opacity-0"
+          }`}
+        >
           If you&apos;re not sure whether your situation fits, upload the bill anyway. Our analyzer will tell you what it found and flag if the scope is outside CareGap&apos;s current coverage.
         </p>
       </div>
