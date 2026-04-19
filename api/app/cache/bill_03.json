@@ -1,0 +1,236 @@
+{
+  "extract": {
+    "provider_name": "Garden State Orthopedic Specialists",
+    "provider_address": "800 Nassau St, Suite 210, Princeton, NJ 08542",
+    "provider_npi": "1234567890",
+    "patient_name": "Sarah L. Thompson",
+    "date_of_service": "04/02/2024",
+    "account_number": "612847",
+    "insurance": "BlueCross PPO",
+    "line_items": [
+      {
+        "code": "99214",
+        "code_type": "CPT",
+        "description": "Office visit - Level 4 (moderate)",
+        "units": 1,
+        "charged_amount": 245.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "73560",
+        "code_type": "CPT",
+        "description": "X-ray knee, 1-2 views",
+        "units": 1,
+        "charged_amount": 180.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "73562",
+        "code_type": "CPT",
+        "description": "X-ray knee, 3 views",
+        "units": 1,
+        "charged_amount": 225.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "73564",
+        "code_type": "CPT",
+        "description": "X-ray knee, complete, 4+ views",
+        "units": 1,
+        "charged_amount": 290.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "20610",
+        "code_type": "CPT",
+        "description": "Joint injection - major joint",
+        "units": 1,
+        "charged_amount": 385.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "J3301",
+        "code_type": "HCPCS",
+        "description": "Triamcinolone injection, 1mg",
+        "units": 40,
+        "charged_amount": 340.0,
+        "place_of_service": "non_facility"
+      },
+      {
+        "code": "99070",
+        "code_type": "CPT",
+        "description": "Supplies and materials",
+        "units": 1,
+        "charged_amount": 65.0,
+        "place_of_service": "non_facility"
+      }
+    ],
+    "total_charged": 1730.0
+  },
+  "analysis": {
+    "anomalies": [
+      {
+        "line_index": 0,
+        "code": "99214",
+        "description": "Office visit - Level 4 (moderate)",
+        "charged_amount": 245.0,
+        "medicare_rate": 84.2,
+        "multiplier": 2.9,
+        "flag": "overcharge",
+        "estimated_savings": 160.8
+      },
+      {
+        "line_index": 1,
+        "code": "73560",
+        "description": "X-ray knee, 1-2 views",
+        "charged_amount": 180.0,
+        "medicare_rate": 34.28,
+        "multiplier": 5.3,
+        "flag": "overcharge",
+        "estimated_savings": 145.72
+      },
+      {
+        "line_index": 2,
+        "code": "73562",
+        "description": "X-ray knee, 3 views",
+        "charged_amount": 225.0,
+        "medicare_rate": 42.27,
+        "multiplier": 5.3,
+        "flag": "overcharge",
+        "estimated_savings": 182.73
+      },
+      {
+        "line_index": 3,
+        "code": "73564",
+        "description": "X-ray knee, complete, 4+ views",
+        "charged_amount": 290.0,
+        "medicare_rate": 49.25,
+        "multiplier": 5.9,
+        "flag": "overcharge",
+        "estimated_savings": 240.75
+      },
+      {
+        "line_index": 4,
+        "code": "20610",
+        "description": "Joint injection - major joint",
+        "charged_amount": 385.0,
+        "medicare_rate": 39.6,
+        "multiplier": 9.7,
+        "flag": "overcharge",
+        "estimated_savings": 345.4
+      }
+    ],
+    "total_charged": 1730.0,
+    "total_medicare": 249.6,
+    "estimated_savings": 1075.4,
+    "line_count": 7,
+    "flagged_count": 5
+  },
+  "legal_matches": {
+    "0:99214": [
+      {
+        "title": "How to Dispute a Medical Bill \u2014 Step-by-Step",
+        "citation": "Use CareGap's CMS PFS pricing tool to compare each CPT code's charge against the Medicare-allowed amount. A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "The $245.00 charge for CPT 99214 is 2.9x the Medicare-allowed rate of $84.20, approaching the threshold the KB identifies as potentially excessive, giving the patient grounds to formally dispute this charge through the provider's billing department or their insurer.",
+        "confidence": "high"
+      }
+    ],
+    "1:73560": [
+      {
+        "title": "Common Billing Errors to Check",
+        "citation": "A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "CPT 73560 is billed at $180.00 against a Medicare rate of $34.28, representing a 5.3x multiplier that clearly exceeds the 3-5x threshold flagged as potentially excessive in the knowledge base.",
+        "confidence": "high"
+      },
+      {
+        "title": "How to Dispute a Medical Bill \u2014 Step-by-Step",
+        "citation": "Use CareGap's CMS PFS pricing tool to compare each CPT code's charge against the Medicare-allowed amount. A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "The 5.3x overcharge on CPT 73560 warrants a formal dispute; the patient should contact Garden State Orthopedic Specialists' billing department referencing the specific line item and, if unresolved, file a grievance with BlueCross PPO or a complaint with the New Jersey State Attorney General.",
+        "confidence": "high"
+      },
+      {
+        "title": "State-Level Protections (Selected States)",
+        "citation": "New Jersey \u2014 Out-of-Network Consumer Protection Act: Among the strongest state protections; limits patient liability for inadvertent out-of-network care.",
+        "why_it_applies": "If Garden State Orthopedic Specialists is out-of-network under the patient's BlueCross PPO plan, New Jersey's Out-of-Network Consumer Protection Act may limit the patient's liability and provide an additional avenue to challenge the excessive charge.",
+        "confidence": "medium"
+      }
+    ],
+    "2:73562": [
+      {
+        "title": "How to Dispute a Medical Bill \u2014 Step-by-Step",
+        "citation": "Use CareGap's CMS PFS pricing tool to compare each CPT code's charge against the Medicare-allowed amount. A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "At 5.3x the Medicare rate, this charge exceeds the 3-5x threshold explicitly flagged as potentially excessive in the dispute guidance, giving the patient clear grounds to formally dispute CPT 73562 with the billing department.",
+        "confidence": "high"
+      }
+    ],
+    "3:73564": [
+      {
+        "title": "How to Dispute a Medical Bill \u2014 Step-by-Step",
+        "citation": "A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "At 5.9x the Medicare rate, this charge exceeds the 3-5x threshold flagged as potentially excessive, giving the patient clear grounds to formally dispute CPT 73564 using the step-by-step process outlined in Section 6.",
+        "confidence": "high"
+      }
+    ],
+    "4:20610": [
+      {
+        "title": "How to Dispute a Medical Bill \u2014 Step-by-Step",
+        "citation": "A charge significantly above the Medicare rate (e.g., 3-5x or more) may be excessive.",
+        "why_it_applies": "At 9.7x the Medicare rate, this charge far exceeds the 3-5x threshold flagged as potentially excessive in the KB, giving the patient clear grounds to formally dispute the charge through the provider's billing department and, if unresolved, through their insurer or state regulators.",
+        "confidence": "high"
+      },
+      {
+        "title": "State-Level Protections (Selected States)",
+        "citation": "Out-of-Network Consumer Protection Act: Among the strongest state protections; limits patient liability for inadvertent out-of-network care.",
+        "why_it_applies": "The provider is located in New Jersey (Garden State Orthopedic Specialists), and if any portion of this charge relates to out-of-network billing under the BlueCross PPO plan, New Jersey's Out-of-Network Consumer Protection Act may further limit the patient's liability beyond federal protections.",
+        "confidence": "medium"
+      }
+    ]
+  },
+  "letter": {
+    "subject": "Formal Dispute of Medical Bill \u2014 Account #612847 \u2014 Sarah L. Thompson \u2014 Date of Service 04/02/2024",
+    "body": "Sarah L. Thompson\n[Your Address]\n\nDate: [Today's Date]\n\nBilling Department\nGarden State Orthopedic Specialists\n800 Nassau St, Suite 210\nPrinceton, NJ 08542\n\nRE: Formal Billing Dispute \u2014 Patient: Sarah L. Thompson \u2014 Account Number: 612847 \u2014 Date of Service: April 2, 2024 \u2014 Insurer: BlueCross PPO \u2014 Total Billed: $1,730.00\n\nDear Billing Department,\n\nI am writing on behalf of patient Sarah L. Thompson to formally dispute multiple charges appearing on the bill associated with Account Number 612847, for services rendered on April 2, 2024, at Garden State Orthopedic Specialists. A review of the itemized charges against the Medicare Physician Fee Schedule (CMS PFS) published rates for the applicable locality has identified five line items billed at rates that are materially and significantly above the Medicare-allowed amounts. These discrepancies raise serious concerns regarding the accuracy and reasonableness of the charges as submitted.\n\nThis letter constitutes a formal written dispute and a request for review, correction, and written response within thirty (30) calendar days of receipt.\n\n\nDISPUTED CHARGES\n\nThe following five CPT codes have been flagged as potentially excessive based on a comparison with the Medicare-allowed amounts published in the CMS Physician Fee Schedule. A charge significantly above the Medicare rate, generally understood as 3x or more, may be considered excessive and is a recognized indicator of a billing anomaly.\n\n1. CPT 99214 \u2014 Office Visit, Level 4 (Moderate Complexity)\n   Billed Amount: $245.00\n   Medicare-Allowed Amount: $84.20\n   Multiplier: 2.9x the Medicare rate\n   Basis for Dispute: The billed amount is approximately 2.9 times the Medicare-allowed rate for this service. This charge warrants itemized justification.\n\n2. CPT 73560 \u2014 X-Ray, Knee, 1-2 Views\n   Billed Amount: $180.00\n   Medicare-Allowed Amount: $34.28\n   Multiplier: 5.3x the Medicare rate\n   Basis for Dispute: The billed amount is approximately 5.3 times the Medicare-allowed rate, which substantially exceeds the threshold commonly recognized as indicative of an excessive charge.\n\n3. CPT 73562 \u2014 X-Ray, Knee, 3 Views\n   Billed Amount: $225.00\n   Medicare-Allowed Amount: $42.27\n   Multiplier: 5.3x the Medicare rate\n   Basis for Dispute: The billed amount is approximately 5.3 times the Medicare-allowed rate, which substantially exceeds the threshold commonly recognized as indicative of an excessive charge.\n\n4. CPT 73564 \u2014 X-Ray, Knee, Complete, 4 or More Views\n   Billed Amount: $290.00\n   Medicare-Allowed Amount: $49.25\n   Multiplier: 5.9x the Medicare rate\n   Basis for Dispute: The billed amount is approximately 5.9 times the Medicare-allowed rate, which substantially exceeds the threshold commonly recognized as indicative of an excessive charge.\n\n5. CPT 20610 \u2014 Arthrocentesis or Joint Injection, Major Joint\n   Billed Amount: $385.00\n   Medicare-Allowed Amount: $39.60\n   Multiplier: 9.7x the Medicare rate\n   Basis for Dispute: The billed amount is approximately 9.7 times the Medicare-allowed rate. This is a severe disparity and requires immediate review and written justification.\n\nTotal Amount Disputed: $1,325.00 (representing the five line items identified above out of the total billed amount of $1,730.00).\n\n\nAPPLICABLE LEGAL PROTECTIONS AND AUTHORITIES\n\nThis dispute is submitted with reference to the following applicable legal frameworks:\n\n1. New Jersey Out-of-Network Consumer Protection Act (N.J.S.A. 26:2SS-1 et seq.): New Jersey's Out-of-Network Consumer Protection Act is among the strongest state-level protections in the country. It limits patient financial liability for inadvertent out-of-network care and establishes standards for what constitutes a reasonable charge. To the extent any of the above services were rendered by an out-of-network provider, or if any portion of this bill reflects out-of-network rates applied to an in-network encounter, the patient's liability may be limited under this statute. We request written confirmation of the network status of each rendering provider for each service listed above.\n\n2. No Surprises Act (Effective January 1, 2022, codified at 42 U.S.C. \u00a7 300gg-111 et seq.): Under the No Surprises Act, effective January 1, 2022, patients are protected from certain unexpected out-of-network charges and balance billing in specified circumstances. If any of the disputed charges constitute balance billing or surprise billing as defined under this Act, the provider is required to comply with the applicable cost-sharing limitations and dispute resolution procedures established thereunder.\n\n3. HIPAA Right of Access, 45 C.F.R. \u00a7 164.524: Pursuant to the Health Insurance Portability and Accountability Act, 45 C.F.R. \u00a7 164.524, Ms. Thompson has the right to access and obtain a copy of her complete medical and billing records. Accordingly, this letter also constitutes a formal request for a fully itemized bill for all services rendered on April 2, 2024, including but not limited to: each CPT code billed, the description of each service, the date and rendering provider for each service, the charge for each service, any adjustments applied, and the amounts billed to and paid by BlueCross PPO. This itemized bill must be provided within thirty (30) days of receipt of this request in accordance with applicable law.\n\n\nREQUESTED ACTIONS\n\nWe respectfully request that Garden State Orthopedic Specialists take the following actions within thirty (30) calendar days of receipt of this letter:\n\n1. Provide a fully itemized bill as described above, pursuant to HIPAA 45 C.F.R. \u00a7 164.524.\n\n2. Conduct an internal review of each of the five disputed CPT codes identified in this letter and provide a written explanation for the basis of each charge, including any cost justification for the significant deviation from Medicare-allowed rates.\n\n3. Issue a corrected bill or written confirmation that the charges have been reviewed and adjusted to a reasonable and accurate amount, with written notice of any changes provided to both the patient and BlueCross PPO.\n\n4. Confirm in writing the network status of each rendering provider for the date of service.\n\n5. Place any collection activity related to the disputed charges on hold pending resolution of this dispute.\n\n\nRESPONSE DEADLINE\n\nPlease provide a written response to this dispute no later than thirty (30) calendar days from the date of receipt of this letter. Correspondence should be directed to the patient at the address listed above, or via the contact information provided upon request.\n\n\nNEXT STEPS IF UNRESOLVED\n\nIf this dispute is not acknowledged and addressed within the thirty (30) day period, or if a satisfactory resolution is not reached, Ms. Thompson reserves the right to pursue all available remedies, including but not limited to:\n\n1. Filing a formal complaint with the New Jersey Division of Consumer Affairs and the Office of the New Jersey Attorney General regarding potential violations of the New Jersey Out-of-Network Consumer Protection Act and applicable consumer protection statutes.\n\n2. Filing a complaint with the New Jersey Department of Banking and Insurance, which has regulatory authority over health insurance billing practices and provider conduct in this state.\n\n3. Filing a complaint with the Consumer Financial Protection Bureau (CFPB) regarding unfair, deceptive, or abusive billing practices.\n\n4. Escalating the matter to BlueCross PPO for a formal insurance-level billing dispute and audit of the charges submitted under Account Number 612847.\n\n5. Pursuing any additional legal remedies available under applicable state and federal law.\n\nIt is our sincere preference to resolve this matter directly and promptly with Garden State Orthopedic Specialists. We appreciate your timely attention to this dispute and look forward to your written response.\n\nRespectfully submitted,\n\n[Patient Advocate Name or Patient Signature]\nOn behalf of Sarah L. Thompson\nAccount Number: 612847\n[Your Address]\n[Phone Number]\n[Email Address]",
+    "recipient_block": "To:\nBilling Department\nGarden State Orthopedic Specialists\n800 Nassau St, Suite 210\nPrinceton, NJ 08542"
+  },
+  "roadmap": [
+    {
+      "title": "Request Itemized Bill with CPT Codes",
+      "detail": "Contact Garden State Orthopedic Specialists billing department and request a fully itemized bill listing every charge with its corresponding CPT code, date of service, and provider name. You are legally entitled to this document and it is the foundation for disputing any errors.",
+      "deadline": "within 7 days",
+      "escalation": "low"
+    },
+    {
+      "title": "Review Flagged Charges Against Benchmark Rates",
+      "detail": "CareGap has already identified 5 flagged charges with a potential savings of $1,075.40 against the $1,730.00 total billed. Cross-reference each flagged line item on your itemized bill with the CPT codes and amounts identified in your dispute report to confirm discrepancies before writing your dispute letter.",
+      "deadline": "within 10 days",
+      "escalation": "low"
+    },
+    {
+      "title": "Send a Formal Dispute Letter to the Billing Department",
+      "detail": "Draft and send a written dispute letter to Garden State Orthopedic Specialists citing each specific overcharged or erroneous line item, referencing the CPT codes, the amounts billed, and the benchmark rates. Send via certified mail with return receipt requested so you have a documented paper trail, and keep a copy for your records.",
+      "deadline": "within 21 days",
+      "escalation": "medium"
+    },
+    {
+      "title": "File a Grievance with Your Insurance Provider",
+      "detail": "If you are insured, submit a formal grievance to your insurance company disputing how the claims from Garden State Orthopedic Specialists were processed or paid. Attach your itemized bill, the CareGap dispute summary, and your dispute letter as supporting documentation to strengthen your case.",
+      "deadline": "within 30 days",
+      "escalation": "medium"
+    },
+    {
+      "title": "File a Complaint with the New Jersey Insurance Commissioner or Attorney General",
+      "detail": "If the billing department and your insurer do not resolve the dispute satisfactorily, file a formal complaint with the New Jersey Department of Banking and Insurance or the New Jersey Attorney General's office. New Jersey has state-level consumer protections for medical billing disputes, and a formal complaint creates regulatory pressure on the provider to negotiate.",
+      "deadline": "within 60 days",
+      "escalation": "high"
+    },
+    {
+      "title": "Consult a Healthcare Billing Advocate or Attorney",
+      "detail": "Given that the disputed amount of approximately $1,075.40 is substantial, if prior steps have not produced a resolution, engage a certified medical billing advocate or a healthcare attorney to negotiate directly on your behalf. Many advocates work on contingency or charge a percentage of savings recovered, making this a cost-effective option at this dollar amount.",
+      "deadline": "within 75 days",
+      "escalation": "high"
+    }
+  ],
+  "summary": "# Your Orthopedic Bill Summary\n\nYou were charged $245 for a standard office visit, but Medicare says that same visit should only cost $84.20\u2014that's a $160.80 difference on just that one charge. Overall, we found about $1,075 in charges on your $1,730 bill that look like they might be too high compared to what insurance companies typically pay for these services. It's worth calling the office to ask why their prices are so much higher than the standard rates, or checking with your insurance company to see if they'll help negotiate the bill down.",
+  "warnings": [],
+  "cached": true,
+  "elapsed_seconds": 0
+}

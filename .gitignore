@@ -11,7 +11,7 @@ node_modules/
 Thumbs.db
 data/bills/*
 !data/bills/.gitkeep
-api/app/cache/
+# cache is committed — needed for demo failsafe on DigitalOcean
 *.egg-info/
 dist/
 build/

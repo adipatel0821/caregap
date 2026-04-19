@@ -9,6 +9,7 @@ from .ocr import extract_bill
 from .cms import analyze, Anomaly, AnalysisResult
 from .legal import match_all_protections, LegalMatch, LegalResult
 from .letter import generate_all, GenerateResult
+from .pipeline import run_pipeline
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
 
@@ -87,3 +88,15 @@ async def generate(req: GenerateRequest):
     except ValueError as e:
         raise HTTPException(422, str(e))
     return result.model_dump()
+
+
+@app.post("/api/run")
+async def run_full(file: UploadFile = File(...)):
+    if file.content_type not in ALLOWED_TYPES:
+        raise HTTPException(400, f"Unsupported file type: {file.content_type}")
+
+    data = await file.read()
+    if len(data) > MAX_SIZE:
+        raise HTTPException(400, "File too large — 10 MB max")
+
+    return run_pipeline(data, mime_type=file.content_type)
