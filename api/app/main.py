@@ -38,7 +38,20 @@ MAX_SIZE = 10 * 1024 * 1024  # 10 MB
 
 @app.get("/health")
 def health():
-    return {"ok": True}
+    import os
+    has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
+    has_tavily = bool(os.environ.get("TAVILY_API_KEY"))
+    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
+    has_data = os.path.exists(os.path.join(data_dir, "caregap_pricing_merged.csv"))
+    cache_dir = os.path.join(os.path.dirname(__file__), "cache")
+    cache_files = len([f for f in os.listdir(cache_dir) if f.endswith(".json")]) if os.path.exists(cache_dir) else 0
+    return {
+        "ok": True,
+        "anthropic_key": has_anthropic,
+        "tavily_key": has_tavily,
+        "data_dir_exists": has_data,
+        "cached_bills": cache_files,
+    }
 
 
 @app.post("/api/extract")
