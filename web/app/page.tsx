@@ -11,7 +11,6 @@ import { TrustSection } from "@/components/trust-section";
 import { LegalProtections } from "@/components/legal-protections";
 import { StatsBand } from "@/components/stats-band";
 import { WhoIsFor } from "@/components/who-is-for";
-import { FAQ } from "@/components/faq";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -265,8 +264,6 @@ function Landing({
           </div>
         </div>
       </section>
-
-      <FAQ />
 
       {/* TODO(user): Item 11 — Social proof / testimonials.
           Do NOT fabricate testimonials. Leave this commented out entirely
