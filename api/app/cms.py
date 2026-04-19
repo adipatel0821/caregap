@@ -9,7 +9,10 @@ from .models import BillExtract, LineItem
 
 log = logging.getLogger(__name__)
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "../../data")
+# check api/data/ first (Vercel deployment), then repo root data/
+_api_data = os.path.join(os.path.dirname(__file__), "../data")
+_root_data = os.path.join(os.path.dirname(__file__), "../../data")
+DATA_DIR = _api_data if os.path.exists(_api_data) else _root_data
 
 
 class MedicareRate(BaseModel):

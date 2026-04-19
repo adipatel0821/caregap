@@ -15,7 +15,9 @@ load_dotenv()
 
 log = logging.getLogger(__name__)
 
-LEGAL_KB_PATH = os.path.join(os.path.dirname(__file__), "../../data/legal_kb.md")
+_api_kb = os.path.join(os.path.dirname(__file__), "../data/legal_kb.md")
+_root_kb = os.path.join(os.path.dirname(__file__), "../../data/legal_kb.md")
+LEGAL_KB_PATH = _api_kb if os.path.exists(_api_kb) else _root_kb
 
 
 class LegalMatch(BaseModel):
