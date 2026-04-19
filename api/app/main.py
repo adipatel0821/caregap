@@ -2,10 +2,12 @@ import logging
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from .models import BillExtract
 from .ocr import extract_bill
-from .cms import analyze, AnalysisResult
+from .cms import analyze, Anomaly, AnalysisResult
+from .legal import match_all_protections, LegalResult
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
 
@@ -58,3 +60,14 @@ async def extract_manual(bill: BillExtract):
 async def analyze_bill(bill: BillExtract):
     result = analyze(bill)
     return result.model_dump()
+
+
+class LegalRequest(BaseModel):
+    extract: BillExtract
+    anomalies: list[Anomaly]
+
+
+@app.post("/api/legal")
+async def legal_match(req: LegalRequest):
+    results = match_all_protections(req.anomalies, req.extract)
+    return {"matches": {k: [m.model_dump() for m in v] for k, v in results.items()}}
