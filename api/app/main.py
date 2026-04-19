@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .models import BillExtract
 from .ocr import extract_bill
+from .cms import analyze, AnalysisResult
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(message)s")
 
@@ -51,3 +52,9 @@ async def extract(file: UploadFile = File(...)):
 @app.post("/api/extract/manual")
 async def extract_manual(bill: BillExtract):
     return bill.model_dump()
+
+
+@app.post("/api/analyze")
+async def analyze_bill(bill: BillExtract):
+    result = analyze(bill)
+    return result.model_dump()

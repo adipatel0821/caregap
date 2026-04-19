@@ -13,7 +13,14 @@ load_dotenv()
 
 log = logging.getLogger(__name__)
 
-client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY", ""))
+_client = None
+
+
+def _get_client():
+    global _client
+    key = os.environ.get("GOOGLE_API_KEY", "")
+    _client = genai.Client(api_key=key)
+    return _client
 
 EXTRACTION_PROMPT = """You are a medical bill parser. Extract structured data from this bill image.
 
@@ -58,7 +65,7 @@ Return ONLY the corrected JSON object, no markdown fences, no explanation."""
 
 def extract_bill(image_bytes: bytes, mime_type: str = "image/jpeg") -> BillExtract:
     start = time.time()
-    response = client.models.generate_content(
+    response = _get_client().models.generate_content(
         model="gemini-2.0-flash",
         contents=[
             EXTRACTION_PROMPT,
