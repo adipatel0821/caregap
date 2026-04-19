@@ -41,8 +41,11 @@ def health():
     import os
     has_anthropic = bool(os.environ.get("ANTHROPIC_API_KEY"))
     has_tavily = bool(os.environ.get("TAVILY_API_KEY"))
-    data_dir = os.path.join(os.path.dirname(__file__), "../../data")
-    has_data = os.path.exists(os.path.join(data_dir, "caregap_pricing_merged.csv"))
+    data_api = os.path.join(os.path.dirname(__file__), "../data")
+    data_root = os.path.join(os.path.dirname(__file__), "../../data")
+    has_data_api = os.path.exists(os.path.join(data_api, "caregap_pricing_merged.csv"))
+    has_data_root = os.path.exists(os.path.join(data_root, "caregap_pricing_merged.csv"))
+    has_data = has_data_api or has_data_root
     cache_dir = os.path.join(os.path.dirname(__file__), "cache")
     cache_files = len([f for f in os.listdir(cache_dir) if f.endswith(".json")]) if os.path.exists(cache_dir) else 0
     return {
